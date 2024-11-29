@@ -16,7 +16,7 @@ Este projeto contém a implementação de várias iniciativas, cada uma dividida
 ---
 
 ## **Estrutura de Pastas**
-      ```plaintext
+      
       Projeto_Maua_Sustentavel/
       ├── docs/                     # Documentação do projeto
       │   ├── planejamento.md       # Planejamento estratégico da Secretaria de Projetos e Inovação
@@ -37,40 +37,39 @@ Este projeto contém a implementação de várias iniciativas, cada uma dividida
           ├── test_energia_solar/   # Testes para implementação do Mauá 100% Solar
           ├── test_economia_circular/ # Testes para iniciativas de economia circular
           └── test_monitoramento/   # Testes de monitoramento e relatórios em tempo real
-      ```
-
+      
 ---
 
 ## **Organograma das Secretarias**
 
 ### **Prefeitura de Mauá**
 
-```plaintext
-Prefeitura de Mauá
-├── Gabinete do Prefeito
-├── Administração e Modernização
-├── Assistência Social
-│   └── Secretaria de Energia Social
-│       ├── CRAS (Centro de Referência de Assistência Social)
-│       ├── Núcleos de Apoio à Economia Solidária
-│       ├── Defesa Social
-│       └── Centro de Capacitação Profissional
-├── Assistência Jurídica
-├── Controladoria-Geral do Município
-├── Cultura
-├── Desenvolvimento Econômico
-├── Esportes e Lazer
-├── Educação
-├── Finanças
-├── Governo
-├── Meio Ambiente
-│   └── Secretaria de Projetos e Inovação (Foco em Sustentabilidade)
-│       ├── Gestão de Projetos Sustentáveis
-│       ├── Inovação Tecnológica e Sustentabilidade
-│       ├── Atração de Investimentos e Parcerias
-│       └── Educação Ambiental e Conscientização
-├── Saúde
-└── Segurança Pública
+``` 
+            Prefeitura de Mauá
+            ├── Gabinete do Prefeito
+            ├── Administração e Modernização
+            ├── Assistência Social
+            │   └── Secretaria de Energia Social
+            │       ├── CRAS (Centro de Referência de Assistência Social)
+            │       ├── Núcleos de Apoio à Economia Solidária
+            │       ├── Defesa Social
+            │       └── Centro de Capacitação Profissional
+            ├── Assistência Jurídica
+            ├── Controladoria-Geral do Município
+            ├── Cultura
+            ├── Desenvolvimento Econômico
+            ├── Esportes e Lazer
+            ├── Educação
+            ├── Finanças
+            ├── Governo
+            ├── Meio Ambiente
+            │   └── Secretaria de Projetos e Inovação (Foco em Sustentabilidade)
+            │       ├── Gestão de Projetos Sustentáveis
+            │       ├── Inovação Tecnológica e Sustentabilidade
+            │       ├── Atração de Investimentos e Parcerias
+            │       └── Educação Ambiental e Conscientização
+            ├── Saúde
+            └── Segurança Pública
 ```
 
 ---
@@ -81,6 +80,7 @@ Prefeitura de Mauá
 3. **Inovação Sustentável** 💡: Desenvolvimento de soluções tecnológicas verdes e inteligentes.
 4. **Atração de Investimentos Verdes** 🏭: Incentivo à criação de um polo industrial sustentável em Mauá.
 5. **Data Cloud Sustentável** 🌐: Implementação de uma infraestrutura de dados ecológica que otimize o uso de energias renováveis.
+6. ** Produtores, distribuidores, comercializadores, concessionárias, grandes consumidores certificados família ISO 50001 - Eficiência Energética.
 
 ---
 
