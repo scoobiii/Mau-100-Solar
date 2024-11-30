@@ -1,8 +1,8 @@
-# Mau-100%-Solar
+# Mauá 100% Solar
 
 ---
  
-Aqui está uma estrutura de **README** para o **Projeto de Lei de Criação da Secretaria de Projetos e Inovação de Mauá**, incluindo um organograma das secretarias e pastas de arquivos do projeto:
+**Projeto de Lei de Criação da Secretaria de Projetos e Inovação de Mauá**, incluindo um organograma das secretarias e pastas de arquivos do projeto:
 
 ---
 
