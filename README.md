@@ -75,12 +75,19 @@ Este projeto contém a implementação de várias iniciativas, cada uma dividida
 ---
 
 ## **Objetivos do Projeto:**
-1. **Mauá 100% Solar** ☀️: Implementação de energia solar em todos os prédios públicos e incentivo à adoção de sistemas solares em áreas privadas.
-2. **Economia Circular** ♻️: Estabelecimento de práticas de economia circular, promovendo a sustentabilidade e reduzindo os desperdícios.
+1. **Mauá 100% Solar** ☀️: Implementação de energia solar em todos os prédios públicos e incentivo à adoção de sistemas solares em áreas privadas. Clientes pesoa física       ou jurídica negociando excente energético através de Camara de Comercialização de Energia Elétrica de Mauá.
+2. **Muá 100% Economia Circular** ♻️: Estabelecimento de práticas de economia circular, promovendo a sustentabilidade e reduzindo os desperdícios.
 3. **Inovação Sustentável** 💡: Desenvolvimento de soluções tecnológicas verdes e inteligentes.
 4. **Atração de Investimentos Verdes** 🏭: Incentivo à criação de um polo industrial sustentável em Mauá.
 5. **Data Cloud Sustentável** 🌐: Implementação de uma infraestrutura de dados ecológica que otimize o uso de energias renováveis.
-6. ** Produtores, distribuidores, comercializadores, concessionárias, grandes consumidores certificados família ISO 50001 - Eficiência Energética.
+6. **Familia ISO 50001** Produtores, distribuidores, comercializadores, concessionárias, grandes consumidores certificados família ISO 50001 - Eficiência Energética.
+7. **Fazendas Solares Verticais** Fazendas urbanas produzindo verticalmente para otimizar espaços e minimizar os impactos em áres de preservação de fauna, flora e humana      com incremento de renda local.
+8. **MAUAH** Cripto Moeda Local para lastrear financiamentos de projetos; cripto conta para consumidores em suas cripto carteiras, geram CripBackMAUA em compras     
+     analógicas ou no ecommerce, recebendo cripto cashback a medida que resíduos técnicos e orgânicos retomam a economia circular.
+9. **MauáThon** Hackthon internacional para viabilizar projetos de cidade inteligente, sustentável e cosmopolita, integrada com soluções para pop rua, catadores, empreendedores, empresarios e os cidadãos moradores em ou trânsito por Mauá.
+10. **Mauá 100% Mobilidade Elétrica Free** São Caetano, Maricá podem. Mauá pode!
+11. **Mauá 100% renda per capita US$100k** Maricá e Noruega podem. Mauá pode!
+12. **Mauá 100% inclusiva** Mauá 100% preparada para cadeirantes e outras necessidades especiais.
 
 ---
 
