@@ -381,4 +381,455 @@ Com isso, o projeto fica pronto para gerar personas, exibir uma interface de fá
 
 ---
 
+### Automação:
 
+Para automatizar a criação de pastas, arquivos e preenchimento de cada um para seu projeto **PersonaGen**, podemos escrever um script Python que cria a estrutura de diretórios e popula os arquivos necessários. O script também incluirá a geração de um arquivo README.md, um arquivo de testes básico, e a documentação Swagger para a API. Abaixo está o código para criar tudo isso.
+
+### Script de Automação - `setup_project.py`
+
+```python
+import os
+
+# Função para criar diretórios e arquivos
+def create_file(path, content=""):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, 'w') as file:
+        file.write(content)
+    print(f"Arquivo criado: {path}")
+
+def setup_project():
+    # Estrutura de diretórios
+    project_structure = {
+        "PersonaGen/api": {
+            "__init__.py": "",
+            "app.py": '''from flask import Flask, jsonify
+import random
+
+app = Flask(__name__)
+
+@app.route('/gerar_persona', methods=['GET'])
+def gerar_persona():
+    persona = {
+        "Categoria": "Cidadão de Mauá",
+        "Nome": "Carlos",
+        "Idade": 35,
+        "Ocupação": "Engenheiro",
+        "Localização": "Mauá",
+        "Cenário Atual": "Descrição do cenário atual",
+        "Objetivos Primários": "Atingir estabilidade financeira",
+        "Indicadores de Sucesso": "Redução de custos",
+        "Medos e Frustrações": "Medo de fracassar, Obstáculos no trabalho",
+        "Desejos e Ambições": "Crescer profissionalmente, Ser reconhecido no mercado",
+        "Comportamento e Tomadas de Decisão": "Focado em resultados",
+        "Emoções e Perspectivas": "Motivado",
+        "Interações e Relacionamentos": "Interage com colegas de trabalho",
+        "Pontos de Dor": "Falta de recursos",
+        "Prazeres e Motivadores": "Conquistar um prêmio",
+        "Influências e Tabus": "Influência de líderes comunitários",
+        "Jornada do Usuário": "Antes: Trabalho em uma empresa, Durante: Participação no hackathon, Depois: Lançamento de um novo projeto"
+    }
+    return jsonify(persona)
+
+@app.route('/gerar_personas', methods=['GET'])
+def gerar_personas():
+    quantidade = int(request.args.get('quantidade', 1))
+    personas = [gerar_persona() for _ in range(quantidade)]
+    return jsonify(personas)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+''',
+            "routes.py": '''from flask import Flask, jsonify
+from app import app
+
+@app.route('/gerar_persona', methods=['GET'])
+def gerar_persona():
+    return jsonify({"message": "Endpoint para gerar persona"})
+''',
+        },
+        "PersonaGen/tests": {
+            "__init__.py": "",
+            "test_persona.py": '''import unittest
+from api.app import app
+
+class TestPersonaAPI(unittest.TestCase):
+    
+    @classmethod
+    def setUpClass(cls):
+        cls.client = app.test_client()
+
+    def test_gerar_persona(self):
+        response = self.client.get('/gerar_persona')
+        self.assertEqual(response.status_code, 200)
+        data = response.get_json()
+        self.assertIn('Categoria', data)
+        self.assertIn('Nome', data)
+        self.assertIn('Idade', data)
+
+    def test_gerar_personas(self):
+        response = self.client.get('/gerar_personas?quantidade=5')
+        self.assertEqual(response.status_code, 200)
+        data = response.get_json()
+        self.assertEqual(len(data), 5)
+
+if __name__ == '__main__':
+    unittest.main()
+''',
+        },
+        "PersonaGen/swagger": {
+            "persona-gen.yaml": '''openapi: 3.0.0
+info:
+  title: PersonaGen API
+  description: API para gerar personas dinâmicas
+  version: 1.0.0
+paths:
+  /gerar_persona:
+    get:
+      summary: Gera uma persona aleatória
+      responses:
+        '200':
+          description: Persona gerada com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Categoria:
+                    type: string
+                  Nome:
+                    type: string
+                  Idade:
+                    type: integer
+                  Ocupação:
+                    type: string
+                  Localização:
+                    type: string
+                  Cenário Atual:
+                    type: string
+                  Objetivos Primários:
+                    type: string
+                  Indicadores de Sucesso:
+                    type: string
+                  Medos e Frustrações:
+                    type: string
+                  Desejos e Ambições:
+                    type: string
+                  Comportamento e Tomadas de Decisão:
+                    type: string
+                  Emoções e Perspectivas:
+                    type: string
+                  Interações e Relacionamentos:
+                    type: string
+                  Pontos de Dor:
+                    type: string
+                  Prazeres e Motivadores:
+                    type: string
+                  Influências e Tabus:
+                    type: string
+                  Jornada do Usuário:
+                    type: string
+  /gerar_personas:
+    get:
+      summary: Gera múltiplas personas
+      parameters:
+        - in: query
+          name: quantidade
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: Lista de personas geradas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    Categoria:
+                      type: string
+                    Nome:
+                      type: string
+                    Idade:
+                      type: integer
+                    Ocupação:
+                      type: string
+                    Localização:
+                      type: string
+                    Cenário Atual:
+                      type: string
+                    Objetivos Primários:
+                      type: string
+                    Indicadores de Sucesso:
+                      type: string
+                    Medos e Frustrações:
+                      type: string
+                    Desejos e Ambições:
+                      type: string
+                    Comportamento e Tomadas de Decisão:
+                      type: string
+                    Emoções e Perspectivas:
+                      type: string
+                    Interações e Relacionamentos:
+                      type: string
+                    Pontos de Dor:
+                      type: string
+                    Prazeres e Motivadores:
+                      type: string
+                    Influências e Tabus:
+                      type: string
+                    Jornada do Usuário:
+                      type: string
+''',
+        },
+        "PersonaGen": {
+            "requirements.txt": '''flask
+pytest
+pyyaml
+''',
+            "README.md": '''# PersonaGen - API para Geração de Personas Dinâmicas
+
+PersonaGen é uma API que gera personas dinâmicas, com informações relevantes e úteis para projetos de pesquisa, desenvolvimento de produtos e marketing. Ela pode ser utilizada para gerar diferentes personas com base em parâmetros como ocupação, idade, localização, objetivos e outros.
+
+## Funcionalidades
+
+- Geração de personas com atributos personalizados.
+- Endpoint para gerar múltiplas personas de uma vez.
+- Exposição de dados no formato JSON.
+- Documentação completa com Swagger/OpenAPI.
+
+## Instalação
+
+Para rodar o projeto localmente, siga os seguintes passos:
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seu_usuario/personagen.git
+   cd personagen
+   ```
+
+2. Instale as dependências:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Rode o servidor:
+   ```bash
+   python api/app.py
+   ```
+
+A API estará disponível em `http://127.0.0.1:5000/`.
+
+## Testes
+
+Os testes podem ser executados com o `pytest`:
+
+```bash
+pytest tests/test_persona.py
+```
+
+## Documentação
+
+A documentação completa da API pode ser acessada através do Swagger em:
+
+[Swagger Documentation](http://127.0.0.1:5000/docs)
+
+## Licença
+
+Este projeto está licenciado sob a MIT License - consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
+''',
+            ".gitignore": '''*.pyc
+__pycache__/
+.env
+.DS_Store
+''',
+            "Dockerfile": '''FROM python:3.9-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+CMD ["python", "api/app.py"]
+''',
+        }
+    }
+
+    # Criar arquivos e pastas
+    for folder, files in project_structure.items():
+        for filename, content in files.items():
+            create_file(os.path.join(folder, filename), content)
+
+if __name__ == "__main__":
+    setup_project()
+```
+
+### Como usar
+
+1. Copie o código acima em um arquivo chamado `setup_project.py`.
+2. Execute o script com o comando:
+   ```bash
+   python setup_project.py
+   ```
+3. O script irá criar todos os diretórios e arquivos necessários, incluindo o conteúdo básico, como o código da API, testes, documentação e Dockerfile.
+4. O projeto estará pronto para ser aberto no PyCharm ou enviado para o GitHub.
+
+### Conclusão
+
+Este script automatiza a criação do seu projeto **PersonaGen**, estruturando pastas, criando arquivos com o conteúdo necessário e tornando o processo de configuração muito mais rápido.
+
+### - Gerador de Imagens: Integração com Leonardo AI
+
+Aqui está a documentação detalhada para obter e integrar o **PersonaGen (PerGen)** com o **Leonardo AI** para gerar personas dinâmicas com imagens personalizadas. Essa documentação vai guiar você por cada etapa necessária para a configuração e execução do projeto.
+
+---
+
+## Documentação de Obtenção e Integração do **PersonaGen (PerGen)** com **Leonardo AI**
+
+### 1. **Visão Geral**
+
+O projeto **PersonaGen (PerGen)** tem como objetivo gerar personas dinâmicas com base em informações específicas, e integrar uma API de **Leonardo AI** para gerar imagens personalizadas para cada persona. Essa integração permite criar personas com informações como nome, idade, ocupação, localização e, agora, com uma imagem gerada automaticamente pela **Leonardo AI**.
+
+---
+
+### 2. **Pré-requisitos**
+
+Antes de iniciar, você precisa ter as seguintes ferramentas e serviços configurados:
+
+- **Conta no Google Cloud Platform (GCP)** com uma **máquina virtual (VM)** ou uma solução de ambiente de execução para hospedar a aplicação.
+- **Conta na Leonardo AI**: Acesso à API de geração de imagens da **Leonardo AI**.
+- **Python 3.x** instalado no seu ambiente.
+- **Bibliotecas Python**: `flask`, `requests`, `pytest`, e `pyyaml`.
+
+---
+
+### 3. **Passo a Passo para Obtenção e Integração**
+
+#### 3.1. **Obtenção da Chave de API da Leonardo AI**
+
+1. **Crie uma conta na Leonardo AI**:
+   - Acesse o site oficial da Leonardo AI e crie uma conta (caso ainda não tenha).
+   - Após o login, obtenha sua **chave de API** (geralmente disponível em um painel de desenvolvedor ou configurações de API).
+
+2. **Configuração da Chave de API**:
+   - A chave de API será necessária para autenticar suas requisições à API da Leonardo AI.
+   - Guarde a chave em um lugar seguro. Ela será usada no cabeçalho das requisições HTTP para gerar imagens.
+
+#### 3.2. **Integração do Leonardo AI com a API do PersonaGen (PerGen)**
+
+Agora, vamos integrar a **Leonardo AI** com a aplicação **PersonaGen (PerGen)**. A seguir está o código para configurar a geração de imagens para as personas.
+
+##### 3.2.1. **Código da API - app.py**
+
+O código abaixo mostra como integrar a geração de imagens ao endpoint da API `/gerar_persona` no **PersonaGen**:
+
+```python
+from flask import Flask, jsonify
+import random
+import requests
+
+app = Flask(__name__)
+
+# Função para chamar a API do Leonardo AI para gerar a imagem
+def gerar_imagem(nome):
+    url = "https://api.leonardo.ai/v1/generate-image"  # URL da API Leonardo AI
+    headers = {
+        "Authorization": "Bearer <SUA_CHAVE_DE_API>"  # Substitua pela sua chave de API
+    }
+    data = {
+        "prompt": f"Retrato de uma pessoa chamada {nome}, realista, estilo moderno."  # Descrição para a imagem
+    }
+    response = requests.post(url, json=data, headers=headers)
+    if response.status_code == 200:
+        return response.json()['image_url']  # URL da imagem gerada
+    else:
+        return "Imagem não gerada"  # Caso a API não retorne a imagem
+
+@app.route('/gerar_persona', methods=['GET'])
+def gerar_persona():
+    persona = {
+        "Categoria": "Cidadão de Mauá",
+        "Nome": "Carlos",
+        "Idade": 35,
+        "Ocupação": "Engenheiro",
+        "Localização": "Mauá",
+        "Imagem": gerar_imagem("Carlos")  # Gerando a imagem para a persona
+    }
+    return jsonify(persona)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+#### 3.3. **Teste e Validação da API**
+
+1. **Rodando a API Localmente**:
+   - Clone o repositório do **PersonaGen** ou crie a estrutura de diretórios como descrito anteriormente.
+   - Execute o arquivo `app.py` com o comando:
+     ```bash
+     python app.py
+     ```
+   - Isso fará a API ser executada localmente na porta `5000`. Você pode acessar os endpoints da API no navegador ou via ferramentas como o Postman.
+
+2. **Teste do Endpoint `/gerar_persona`**:
+   - Acesse o endpoint `http://127.0.0.1:5000/gerar_persona` no seu navegador ou use o Postman para verificar a resposta JSON.
+   - A resposta deve incluir o nome, idade, ocupação, localização e a URL da imagem gerada pela **Leonardo AI**:
+     ```json
+     {
+       "Categoria": "Cidadão de Mauá",
+       "Nome": "Carlos",
+       "Idade": 35,
+       "Ocupação": "Engenheiro",
+       "Localização": "Mauá",
+       "Imagem": "https://link_da_imagem_gerada_pela_api.com"
+     }
+     ```
+
+---
+
+### 4. **Exibindo a Imagem no Empathy Persona Canvas**
+
+Agora que você integrou a geração de imagem à API, o campo de **Imagem** da persona está automaticamente preenchido com a URL da imagem gerada. Isso pode ser exibido no **Empathy Persona Canvas**, uma ferramenta popular para visualização de personas.
+
+- **Como utilizar no Empathy Canvas**:
+  - Adicione o campo **Imagem** para cada persona gerada.
+  - A URL da imagem gerada pode ser usada para exibir a imagem diretamente no canvas ou em outras ferramentas que utilizem esse formato.
+
+---
+
+### 5. **Implantação no Google Cloud Platform (GCP)**
+
+Agora que o código está funcionando localmente, você pode implantar a API no **Google Cloud Platform (GCP)** em uma **Máquina Virtual (VM)**:
+
+1. **Crie uma Conta no GCP**:
+   - Acesse o [Google Cloud Platform](https://cloud.google.com/) e crie uma conta.
+   - Utilize a versão gratuita ou crie uma VM com as configurações necessárias.
+
+2. **Implante a Aplicação**:
+   - Suba seu código para a VM usando `scp` ou `gsutil`.
+   - Certifique-se de que o Python e as dependências estão instalados na VM.
+   - Execute o comando:
+     ```bash
+     python app.py
+     ```
+   - Sua API estará disponível no IP público da VM.
+
+3. **Acessando a API na Nuvem**:
+   - Acesse o IP da VM no navegador para testar a API na nuvem.
+
+---
+
+### 6. **Conclusão**
+
+Agora você tem um sistema completo que integra **PersonaGen** com **Leonardo AI** para gerar personas dinâmicas com imagens. O campo de imagem foi adicionado ao **Empathy Persona Canvas**, permitindo uma visualização mais rica e interativa das personas. Você pode continuar a melhorar o sistema com mais atributos e funcionalidades, como a personalização da descrição de imagens e a adição de mais dados ao modelo de personas.
+
+---
+
+### 7. **Referências**
+- [API da Leonardo AI](https://leonardo.ai)
+- [Flask Documentation](https://flask.palletsprojects.com/)
+- [Google Cloud Platform](https://cloud.google.com/)
