@@ -1,3 +1,5 @@
+
+
 Para organizar e representar todas as personas de forma estruturada e eficiente, podemos utilizar uma **tabela** para identificar e detalhar os 12 parâmetros do **Empathy Persona Canvas** para cada persona. A tabela permite visualizar os pontos em comum e as diferenças entre elas, facilitando ajustes e análises.
 
 Aqui está o início da tabela, que será expandida para cobrir todas as personas:
@@ -12,213 +14,125 @@ Aqui está o início da tabela, que será expandida para cobrir todas as persona
 
 ---
 
-Vamos gerar um **arquivo JSON** para representar todas as personas detalhadas com os 12 parâmetros do Empathy Persona Canvas. Depois disso, explicarei como usar ferramentas para criar visualizações ricas (gráficos, diagramas, etc.) com base nesses dados. 
+Para gerar uma API que cria as personas com os dados fornecidos, podemos criar um endpoint RESTful que aceita parâmetros ou gera um número aleatório de personas, com informações detalhadas conforme solicitado.
 
-### Estrutura do JSON
+Aqui está um exemplo básico de como criar essa API usando Flask (um framework web em Python) e uma função que gera os dados das personas de maneira dinâmica. 
 
-O JSON terá a seguinte estrutura para cada persona:
+### Passos:
 
-```json
-{
-  "categoria": "Cidadãos de Mauá",
-  "nome": "Maria da Silva",
-  "idade": 34,
-  "ocupacao": "Operadora de máquina",
-  "localizacao": "Jardim Mauá, Mauá - SP",
-  "cenario_atual": "Trabalha 6x1; mãe solo com 2 filhos.",
-  "objetivos_primarios": "Melhorar qualidade de vida e educação para filhos.",
-  "indicadores_de_sucesso": "Renda maior; menos deslocamento.",
-  "medos_e_frustracoes": "Transporte público ineficiente; medo de desemprego.",
-  "desejos_e_ambicoes": "Estabilidade financeira e mais tempo com filhos.",
-  "comportamento_e_tomadas_de_decisao": "Busca serviços confiáveis e econômicos.",
-  "emocoes_e_perspectivas": "Esperança; frustração com desigualdade.",
-  "interacoes_e_relacionamentos": "Influência de familiares e amigos do bairro.",
-  "pontos_de_dor": "Salário insuficiente para cobrir custos.",
-  "prazeres_e_motivadores": "Promoções; ver os filhos felizes.",
-  "influencias_e_tabus": "Influências culturais locais; tabu de 'receber ajuda'.",
-  "jornada_do_usuario": "Luta diária → Otimismo com melhorias → Alívio."
-}
-```
-
-[Empathy_Personas_Maua.json](sandbox:/mnt/data/Empathy_Personas_Maua.json)
-
-### Como criar visualizações gráficas ricas com este JSON
-
-1. **Ferramentas para Visualização:**
-   - **Excel/Google Sheets:** Importe o JSON e crie gráficos simples como tabelas ou gráficos de barras/pizza.
-   - **Power BI ou Tableau:** Use essas ferramentas para criar painéis interativos.
-   - **D3.js:** Para gráficos personalizados diretamente no navegador.
-   - **Python (matplotlib/seaborn/plotly):** Analise e visualize os dados com gráficos avançados.
-
-2. **Processo de Importação:**
-   - Converta o JSON para o formato apropriado se necessário (por exemplo, CSV para planilhas).
-   - Use as ferramentas acima para mapear as categorias e parâmetros em gráficos que melhor representem os dados.
-
-3. ** API PerGen
-
-Para o projeto que gera personas e permite visualizar dados de forma eficiente, podemos chamá-lo de **PersonaGen**. Este nome reflete a geração dinâmica de personas com base nas características e atributos fornecidos. Agora, vamos passar pelos detalhes solicitados.
-
-### 1. Nome do Projeto
-
-**PersonaGen**: API para geração de personas dinâmicas.
-
-### 2. Estrutura do Projeto
-
-Aqui está a estrutura básica do projeto:
-
-```plaintext
-PersonaGen/
-│
-├── api/                    # Código da API
-│   ├── __init__.py
-│   ├── app.py              # Arquivo principal da aplicação
-│   ├── persona.py          # Lógica de criação das personas
-│   ├── routes.py           # Rotas da API
-│
-├── requirements.txt        # Dependências do projeto
-├── tests/                  # Testes automatizados
-│   ├── __init__.py
-│   └── test_persona.py     # Testes para a API
-│
-├── README.md               # Documentação do projeto
-├── Dockerfile              # Arquivo Docker para contêinerizar o projeto
-├── swagger/                # Documentação Swagger/OpenAPI
-│   └── persona-gen.yaml    # Definições da API
-└── .gitignore              # Arquivo Git Ignore
-```
-
-### 3. **README.md**
-
-```markdown
-# PersonaGen - API para Geração de Personas Dinâmicas
-
-PersonaGen é uma API que gera personas dinâmicas, com informações relevantes e úteis para projetos de pesquisa, desenvolvimento de produtos e marketing. Ela pode ser utilizada para gerar diferentes personas com base em parâmetros como ocupação, idade, localização, objetivos e outros.
-
-## Funcionalidades
-
-- Geração de personas com atributos personalizados.
-- Endpoint para gerar múltiplas personas de uma vez.
-- Exposição de dados no formato JSON.
-- Documentação completa com Swagger/OpenAPI.
-
-## Estrutura do Projeto
-
-- **api/**: Contém os arquivos da API, incluindo as rotas e lógica da persona.
-- **tests/**: Testes automatizados para validar a API.
-- **swagger/**: Documentação da API usando Swagger/OpenAPI.
-
-## Instalação
-
-Para rodar o projeto localmente, siga os seguintes passos:
-
-1. Clone o repositório:
+1. Instalar Flask:
    ```bash
-   git clone https://github.com/seu_usuario/personagen.git
-   cd personagen
+   pip install flask
    ```
 
-2. Instale as dependências:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. Rode o servidor:
-   ```bash
-   python api/app.py
-   ```
-
-A API estará disponível em `http://127.0.0.1:5000/`.
-
-## Testes
-
-Os testes podem ser executados com o `pytest`:
-
-```bash
-pytest tests/test_persona.py
-```
-
-## Documentação
-
-A documentação completa da API pode ser acessada através do Swagger em:
-
-[Swagger Documentation](http://127.0.0.1:5000/docs)
-
-## Uso da API
-
-Para gerar uma persona aleatória, faça uma requisição GET para o endpoint:
-
-```
-GET /gerar_persona
-```
-
-Para gerar múltiplas personas, passe o parâmetro `quantidade` na URL:
-
-```
-GET /gerar_personas?quantidade=10
-```
-
-### Exemplo de resposta:
-
-```json
-{
-  "Categoria": "Cidadão de Mauá",
-  "Nome": "Carlos",
-  "Idade": 35,
-  "Ocupação": "Engenheiro",
-  "Localização": "Mauá",
-  "Cenário Atual": "Descrição do cenário atual",
-  "Objetivos Primários": "Atingir estabilidade financeira",
-  "Indicadores de Sucesso": "Redução de custos",
-  "Medos e Frustrações": "Medo de fracassar, Obstáculos no trabalho",
-  "Desejos e Ambições": "Crescer profissionalmente, Ser reconhecido no mercado",
-  "Comportamento e Tomadas de Decisão": "Focado em resultados",
-  "Emoções e Perspectivas": "Motivado",
-  "Interações e Relacionamentos": "Interage com colegas de trabalho",
-  "Pontos de Dor": "Falta de recursos",
-  "Prazeres e Motivadores": "Conquistar um prêmio",
-  "Influências e Tabus": "Influência de líderes comunitários",
-  "Jornada do Usuário": "Antes: Trabalho em uma empresa, Durante: Participação no hackathon, Depois: Lançamento de um novo projeto"
-}
-```
-
-## Licença
-
-Este projeto está licenciado sob a MIT License - consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
-```
-
-### 4. **Testes Automatizados**
-
-**tests/test_persona.py**:
+2. Código da API:
 
 ```python
-import unittest
-from api.app import app
+from flask import Flask, jsonify, request
+import random
 
-class TestPersonaAPI(unittest.TestCase):
+app = Flask(__name__)
+
+# Função para gerar uma persona aleatória
+def gerar_persona():
+    categorias = ["Cidadão de Mauá", "Participante do Hackathon", "Patrocinador", "Secretário", "Funcionário Público", "Vereador", "Empresário", "Funcionário em escala 6x1", "Pop Rua", "Catador", "Vizinho", "Pessoa com Necessidades Especiais", "Elaborador de Projetos de Lei", "CEO de Empresas"]
     
-    @classmethod
-    def setUpClass(cls):
-        cls.client = app.test_client()
+    nomes = ["Carlos", "Maria", "João", "Ana", "Roberto", "Fernanda", "José", "Juliana", "Eduardo", "Patrícia", "Gustavo", "Cláudia", "Ricardo"]
+    idades = [random.randint(18, 70) for _ in range(10)]
+    ocupacoes = ["Engenheiro", "Médico", "Advogado", "Professor", "Empresário", "Estudante", "Auxiliar Administrativo", "Motorista", "Desempregado", "Catador de recicláveis"]
+    locais = ["Mauá", "São Paulo", "Ribeirão Pires", "Santo André", "Diadema", "São Bernardo", "Cidade do México", "Nova Iorque"]
+    
+    # Valores para os demais campos
+    objetivos = ["Atingir estabilidade financeira", "Participar de um evento internacional", "Promover uma mudança social", "Investir em tecnologia sustentável"]
+    indicadores_sucesso = ["Redução de custos", "Aumento de vendas", "Resolução de problemas sociais", "Conquista de parcerias estratégicas"]
+    medos = ["Medo de fracassar", "Preocupações financeiras", "Perder a família", "Não ter mais oportunidades"]
+    frustracoes = ["Falta de apoio", "Obstáculos no trabalho", "Pobreza, desigualdade social"]
+    desejos = ["Crescer profissionalmente", "Conquistar uma casa própria", "Melhorar a qualidade de vida"]
+    ambicoes = ["Ser reconhecido no mercado", "Ajudar minha comunidade", "Viajar pelo mundo"]
+    
+    comportamentos = ["Focado em resultados", "Proativo", "Busca constante por inovação"]
+    emocao = ["Ansioso", "Motivado", "Frustrado"]
+    interacoes = ["Interage com colegas de trabalho", "Participa de eventos sociais", "Recebe conselhos de amigos"]
+    
+    dores = ["Falta de recursos", "Conflitos familiares", "Problemas de saúde"]
+    prazeres = ["Conquistar um prêmio", "Comprar um carro novo", "Ver os filhos crescendo bem"]
+    
+    influencias = ["Influência de líderes comunitários", "Pressões sociais", "Tecnologia disruptiva"]
+    tabus = ["Assuntos políticos", "Religião", "Gênero"]
+    
+    jornada = ["Antes: Trabalho em uma empresa", "Durante: Participação no hackathon", "Depois: Lançamento de um novo projeto ou negócio"]
 
-    def test_gerar_persona(self):
-        response = self.client.get('/gerar_persona')
-        self.assertEqual(response.status_code, 200)
-        data = response.get_json()
-        self.assertIn('Categoria', data)
-        self.assertIn('Nome', data)
-        self.assertIn('Idade', data)
+    persona = {
+        "Categoria": random.choice(categorias),
+        "Nome": random.choice(nomes),
+        "Idade": random.choice(idades),
+        "Ocupação": random.choice(ocupacoes),
+        "Localização": random.choice(locais),
+        "Cenário Atual": "Descrição geral do cenário atual",
+        "Objetivos Primários": random.choice(objetivos),
+        "Indicadores de Sucesso": random.choice(indicadores_sucesso),
+        "Medos e Frustrações": random.choice(medos) + ", " + random.choice(frustracoes),
+        "Desejos e Ambições": random.choice(desejos) + ", " + random.choice(ambicoes),
+        "Comportamento e Tomadas de Decisão": random.choice(comportamentos),
+        "Emoções e Perspectivas": random.choice(emocao),
+        "Interações e Relacionamentos": random.choice(interacoes),
+        "Pontos de Dor": random.choice(dores),
+        "Prazeres e Motivadores": random.choice(prazos),
+        "Influências e Tabus": random.choice(influencias) + ", " + random.choice(tabus),
+        "Jornada do Usuário": random.choice(jornada)
+    }
 
-    def test_gerar_personas(self):
-        response = self.client.get('/gerar_personas?quantidade=5')
-        self.assertEqual(response.status_code, 200)
-        data = response.get_json()
-        self.assertEqual(len(data), 5)
+    return persona
+
+
+# Endpoint para gerar uma quantidade específica de personas
+@app.route('/gerar_personas', methods=['GET'])
+def gerar_personas():
+    try:
+        quantidade = int(request.args.get('quantidade', 1))  # Padrão 1 persona
+        personas = [gerar_persona() for _ in range(quantidade)]
+        return jsonify(personas)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
 
 if __name__ == '__main__':
-    unittest.main()
+    app.run(debug=True)
 ```
 
-### 5. **Documentação Swagger/OpenAPI**
+### Explicação:
+1. **Função `gerar_persona()`**: Esta função gera uma persona com dados aleatórios baseados em listas predefinidas de valores, como nomes, idades, ocupações, etc.
+2. **Endpoint `/gerar_personas`**: Este endpoint aceita um parâmetro `quantidade` para gerar a quantidade desejada de personas. Se nenhum parâmetro for passado, ele gerará uma persona por padrão.
+3. **Execução**: A API será executada no endereço `http://127.0.0.1:5000/gerar_personas`.
+
+### Como Usar:
+1. **Instale o Flask**: Caso ainda não tenha o Flask instalado, execute `pip install flask`.
+2. **Execute o Script**: Salve o código acima em um arquivo `api_personas.py` e execute com `python api_personas.py`.
+3. **Testar a API**:
+   - Para gerar 5 personas: 
+     ```
+     GET http://127.0.0.1:5000/gerar_personas?quantidade=5
+     ```
+   - Para gerar 10 personas:
+     ```
+     GET http://127.0.0.1:5000/gerar_personas?quantidade=10
+     ```
+
+### Resultado Esperado:
+A API irá gerar e retornar um JSON contendo a quantidade de personas solicitadas com todos os campos preenchidos.
+
+### Visualização:
+1. **Online Visualization**: Depois de gerar as personas, você pode exportar o JSON e carregar em ferramentas como:
+   - [json2table](https://json2table.com/) para visualização em tabela.
+   - [RawGraphs](https://rawgraphs.io/) ou [Google Data Studio](https://datastudio.google.com/) para gráficos mais ricos.
+2. **Exportação para Visualização**: Você pode exportar o JSON gerado e usar ferramentas como [Miro](https://miro.com/) ou [Tableau](https://www.tableau.com/) para visualizações mais complexas.
+
+Se precisar de mais detalhes ou ajuda na configuração de alguma ferramenta de visualização, fico à disposição!
+
+---
+
+
+### . **Documentação Swagger/OpenAPI**
 
 Criar a documentação utilizando o Swagger, que será exportada como um arquivo `.yaml`.
 
@@ -331,7 +245,7 @@ paths:
                       type: string
 ```
 
-### 6. **Automatização de Instalação, Teste e Uso**
+### . **Automatização de Instalação, Teste e Uso**
 
 O arquivo **requirements.txt** deve conter as dependências necessárias para o funcionamento do projeto:
 
@@ -341,7 +255,7 @@ pytest
 pyyaml
 ```
 
-### 7. **UX Simples e Rico com Streamlit**
+###  **UX Simples e Rico com Streamlit**
 
 Para um UX simples e poderoso com Streamlit:
 
