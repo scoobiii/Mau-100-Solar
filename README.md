@@ -6,7 +6,7 @@
 
 ---
 
-# **Projeto de Lei: Criação da Secretaria de Projetos e Inovação de Mauá** 🌍⚡
+### **Projeto de Lei: Criação da Secretaria de Projetos e Inovação de Mauá** 🌍⚡
 
 **Objetivo:** Instituir a **Secretaria Municipal de Projetos e Inovação** para coordenar e implementar políticas públicas voltadas à **sustentabilidade**, **economia circular**, **transformação ecológica**, e **inovação** na cidade de Mauá.
 
