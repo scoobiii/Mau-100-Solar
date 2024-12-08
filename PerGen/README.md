@@ -54,3 +54,331 @@ O JSON terá a seguinte estrutura para cada persona:
    - Converta o JSON para o formato apropriado se necessário (por exemplo, CSV para planilhas).
    - Use as ferramentas acima para mapear as categorias e parâmetros em gráficos que melhor representem os dados.
 
+3. ** API PerGen
+
+Para o projeto que gera personas e permite visualizar dados de forma eficiente, podemos chamá-lo de **PersonaGen**. Este nome reflete a geração dinâmica de personas com base nas características e atributos fornecidos. Agora, vamos passar pelos detalhes solicitados.
+
+### 1. Nome do Projeto
+
+**PersonaGen**: API para geração de personas dinâmicas.
+
+### 2. Estrutura do Projeto
+
+Aqui está a estrutura básica do projeto:
+
+```plaintext
+PersonaGen/
+│
+├── api/                    # Código da API
+│   ├── __init__.py
+│   ├── app.py              # Arquivo principal da aplicação
+│   ├── persona.py          # Lógica de criação das personas
+│   ├── routes.py           # Rotas da API
+│
+├── requirements.txt        # Dependências do projeto
+├── tests/                  # Testes automatizados
+│   ├── __init__.py
+│   └── test_persona.py     # Testes para a API
+│
+├── README.md               # Documentação do projeto
+├── Dockerfile              # Arquivo Docker para contêinerizar o projeto
+├── swagger/                # Documentação Swagger/OpenAPI
+│   └── persona-gen.yaml    # Definições da API
+└── .gitignore              # Arquivo Git Ignore
+```
+
+### 3. **README.md**
+
+```markdown
+# PersonaGen - API para Geração de Personas Dinâmicas
+
+PersonaGen é uma API que gera personas dinâmicas, com informações relevantes e úteis para projetos de pesquisa, desenvolvimento de produtos e marketing. Ela pode ser utilizada para gerar diferentes personas com base em parâmetros como ocupação, idade, localização, objetivos e outros.
+
+## Funcionalidades
+
+- Geração de personas com atributos personalizados.
+- Endpoint para gerar múltiplas personas de uma vez.
+- Exposição de dados no formato JSON.
+- Documentação completa com Swagger/OpenAPI.
+
+## Estrutura do Projeto
+
+- **api/**: Contém os arquivos da API, incluindo as rotas e lógica da persona.
+- **tests/**: Testes automatizados para validar a API.
+- **swagger/**: Documentação da API usando Swagger/OpenAPI.
+
+## Instalação
+
+Para rodar o projeto localmente, siga os seguintes passos:
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seu_usuario/personagen.git
+   cd personagen
+   ```
+
+2. Instale as dependências:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Rode o servidor:
+   ```bash
+   python api/app.py
+   ```
+
+A API estará disponível em `http://127.0.0.1:5000/`.
+
+## Testes
+
+Os testes podem ser executados com o `pytest`:
+
+```bash
+pytest tests/test_persona.py
+```
+
+## Documentação
+
+A documentação completa da API pode ser acessada através do Swagger em:
+
+[Swagger Documentation](http://127.0.0.1:5000/docs)
+
+## Uso da API
+
+Para gerar uma persona aleatória, faça uma requisição GET para o endpoint:
+
+```
+GET /gerar_persona
+```
+
+Para gerar múltiplas personas, passe o parâmetro `quantidade` na URL:
+
+```
+GET /gerar_personas?quantidade=10
+```
+
+### Exemplo de resposta:
+
+```json
+{
+  "Categoria": "Cidadão de Mauá",
+  "Nome": "Carlos",
+  "Idade": 35,
+  "Ocupação": "Engenheiro",
+  "Localização": "Mauá",
+  "Cenário Atual": "Descrição do cenário atual",
+  "Objetivos Primários": "Atingir estabilidade financeira",
+  "Indicadores de Sucesso": "Redução de custos",
+  "Medos e Frustrações": "Medo de fracassar, Obstáculos no trabalho",
+  "Desejos e Ambições": "Crescer profissionalmente, Ser reconhecido no mercado",
+  "Comportamento e Tomadas de Decisão": "Focado em resultados",
+  "Emoções e Perspectivas": "Motivado",
+  "Interações e Relacionamentos": "Interage com colegas de trabalho",
+  "Pontos de Dor": "Falta de recursos",
+  "Prazeres e Motivadores": "Conquistar um prêmio",
+  "Influências e Tabus": "Influência de líderes comunitários",
+  "Jornada do Usuário": "Antes: Trabalho em uma empresa, Durante: Participação no hackathon, Depois: Lançamento de um novo projeto"
+}
+```
+
+## Licença
+
+Este projeto está licenciado sob a MIT License - consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
+```
+
+### 4. **Testes Automatizados**
+
+**tests/test_persona.py**:
+
+```python
+import unittest
+from api.app import app
+
+class TestPersonaAPI(unittest.TestCase):
+    
+    @classmethod
+    def setUpClass(cls):
+        cls.client = app.test_client()
+
+    def test_gerar_persona(self):
+        response = self.client.get('/gerar_persona')
+        self.assertEqual(response.status_code, 200)
+        data = response.get_json()
+        self.assertIn('Categoria', data)
+        self.assertIn('Nome', data)
+        self.assertIn('Idade', data)
+
+    def test_gerar_personas(self):
+        response = self.client.get('/gerar_personas?quantidade=5')
+        self.assertEqual(response.status_code, 200)
+        data = response.get_json()
+        self.assertEqual(len(data), 5)
+
+if __name__ == '__main__':
+    unittest.main()
+```
+
+### 5. **Documentação Swagger/OpenAPI**
+
+Criar a documentação utilizando o Swagger, que será exportada como um arquivo `.yaml`.
+
+**swagger/persona-gen.yaml**:
+
+```yaml
+openapi: 3.0.0
+info:
+  title: PersonaGen API
+  description: API para gerar personas dinâmicas
+  version: 1.0.0
+paths:
+  /gerar_persona:
+    get:
+      summary: Gera uma persona aleatória
+      responses:
+        '200':
+          description: Persona gerada com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Categoria:
+                    type: string
+                  Nome:
+                    type: string
+                  Idade:
+                    type: integer
+                  Ocupação:
+                    type: string
+                  Localização:
+                    type: string
+                  Cenário Atual:
+                    type: string
+                  Objetivos Primários:
+                    type: string
+                  Indicadores de Sucesso:
+                    type: string
+                  Medos e Frustrações:
+                    type: string
+                  Desejos e Ambições:
+                    type: string
+                  Comportamento e Tomadas de Decisão:
+                    type: string
+                  Emoções e Perspectivas:
+                    type: string
+                  Interações e Relacionamentos:
+                    type: string
+                  Pontos de Dor:
+                    type: string
+                  Prazeres e Motivadores:
+                    type: string
+                  Influências e Tabus:
+                    type: string
+                  Jornada do Usuário:
+                    type: string
+  /gerar_personas:
+    get:
+      summary: Gera múltiplas personas
+      parameters:
+        - in: query
+          name: quantidade
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: Lista de personas geradas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    Categoria:
+                      type: string
+                    Nome:
+                      type: string
+                    Idade:
+                      type: integer
+                    Ocupação:
+                      type: string
+                    Localização:
+                      type: string
+                    Cenário Atual:
+                      type: string
+                    Objetivos Primários:
+                      type: string
+                    Indicadores de Sucesso:
+                      type: string
+                    Medos e Frustrações:
+                      type: string
+                    Desejos e Ambições:
+                      type: string
+                    Comportamento e Tomadas de Decisão:
+                      type: string
+                    Emoções e Perspectivas:
+                      type: string
+                    Interações e Relacionamentos:
+                      type: string
+                    Pontos de Dor:
+                      type: string
+                    Prazeres e Motivadores:
+                      type: string
+                    Influências e Tabus:
+                      type: string
+                    Jornada do Usuário:
+                      type: string
+```
+
+### 6. **Automatização de Instalação, Teste e Uso**
+
+O arquivo **requirements.txt** deve conter as dependências necessárias para o funcionamento do projeto:
+
+```
+flask
+pytest
+pyyaml
+```
+
+### 7. **UX Simples e Rico com Streamlit**
+
+Para um UX simples e poderoso com Streamlit:
+
+1. Instale o Streamlit:
+   ```bash
+   pip install streamlit
+   ```
+
+2. Código básico para integração com o Streamlit:
+
+```python
+import streamlit as st
+import requests
+
+# Título
+st.title("PersonaGen - Gerador de Personas Dinâmicas")
+
+# Entrada do usuário
+quantidade = st.number_input("Quantas personas deseja gerar?", min_value=1, max_value=100, value=5)
+
+# Botão para gerar
+if st.button("Gerar Personas"):
+    response = requests.get(f"http://127.0.0.1:5000/gerar_personas?quantidade={quantidade}")
+    personas = response.json()
+
+    for persona in personas:
+        st.subheader(f"Persona: {persona['Nome']
+
+}")
+        st.write(f"Categoria: {persona['Categoria']}")
+        st.write(f"Idade: {persona['Idade']}")
+        st.write(f"Ocupação: {persona['Ocupação']}")
+        st.write(f"Objetivos: {persona['Objetivos Primários']}")
+```
+
+Com isso, o projeto fica pronto para gerar personas, exibir uma interface de fácil uso e manter a documentação organizada.
+
+---
+
+
