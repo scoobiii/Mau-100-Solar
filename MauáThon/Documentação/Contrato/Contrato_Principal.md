@@ -66,10 +66,10 @@ Diretor
 **Testemunhas:**
 
 1. EDIVALDO BERINGELA
-   CPF:  
+CPF:  
 
 2. JOÃO BATISTA DOS SANTOS
-   CPF:  
+CPF:  
 
 ---
 
