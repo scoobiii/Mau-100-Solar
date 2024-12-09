@@ -1,4 +1,4 @@
-**Título: MauáThon - Construindo o Futuro com Ciência, Inovação e Sustentabilidade**  
+**MauáThon - Construindo o Futuro com Ciência, Inovação e Sustentabilidade**  
 
 ---
 
