@@ -22,7 +22,7 @@ Juntos, construiremos uma cidade mais inteligente, sustentável e inclusiva até
 #### **O Desafio Genoma Vitória**  
 A Síndrome Vitória é um exemplo de como a ciência pode transformar vidas. Durante o MauáThon, equipes usarão IA e genética para desenvolver soluções que melhorem diagnósticos e personalizem tratamentos.  
 
-...funciona o MauáThon?**
+#### **Como funciona o MauáThon?**
 
 1. **Escolha de Desafios**: Cada participante ou equipe escolherá um desafio de uma lista baseada nos objetivos de Mauá, como:
    - Criar tecnologias para transformar lixo em materiais úteis.
