@@ -1,4 +1,4 @@
-### Explicando para uma criança, Einstein e a comunidade:
+# MauáThon: Explicando para uma criança, Einstein e a comunidade:
 
 Imagine que Mauá é uma grande máquina mágica, mas para ela funcionar melhor, precisamos usar a energia do sol, evitar desperdícios e criar coisas incríveis que ajudem as pessoas e o planeta. O **MauáThon** será como uma grande festa de ideias onde crianças, jovens, adultos e cientistas como Einstein se juntam para inventar, brincar e construir soluções para tornar Mauá uma cidade cheia de luz solar, tecnologia e felicidade!
 
@@ -57,7 +57,7 @@ Einstein, você pode ajudar a fazer Mauá brilhar com sua ciência. E as crianç
 Você vem? 🌟
 
 
-# Proposta de Realização do MauáThon - Hackathon para uma Mauá Sustentável e Inovadora
+### Proposta de Realização do MauáThon - Hackathon para uma Mauá Sustentável e Inovadora
 
 1. Introdução:
 
