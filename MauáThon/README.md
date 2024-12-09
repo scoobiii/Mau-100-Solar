@@ -138,4 +138,3 @@ Acompanhar o desenvolvimento dos projetos vencedores, oferecer suporte e mentori
 Esta proposta visa criar um evento de alto impacto, que impulsione a inovação e o desenvolvimento sustentável em Mauá, gerando benefícios para a cidade e para toda a comunidade.
 
 
-
